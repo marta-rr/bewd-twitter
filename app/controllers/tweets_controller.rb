@@ -44,6 +44,18 @@ class TweetsController < ApplicationController
         render 'tweets/index'
     end
 
+    def index_by_user
+    
+       user = User.find_by(username: params[:username])
+
+       if user
+        @tweets = user.tweets
+        render template: "tweets/index"
+       else
+        render json: { success: false }
+       end
+    end
+
     private
     def tweet_params
         params.require(:tweet).permit(:message)
