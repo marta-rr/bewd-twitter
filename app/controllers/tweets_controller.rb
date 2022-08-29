@@ -39,6 +39,11 @@ class TweetsController < ApplicationController
         end
     end
 
+    def index
+        @tweets = Tweet.all.order("id DESC")
+        render 'tweets/index'
+    end
+
     private
     def tweet_params
         params.require(:tweet).permit(:message)

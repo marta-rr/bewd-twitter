@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   # TWEETS
   post 'tweets' => 'tweets#create'
   delete 'tweets' => 'tweets#destroy'
+  get 'tweets' => 'tweets#index'
 
 
   # Redirect all other paths to index page, which will be taken over by AngularJS
