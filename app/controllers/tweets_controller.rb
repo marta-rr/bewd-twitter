@@ -22,6 +22,23 @@ class TweetsController < ApplicationController
         end
     end
 
+    def destroy
+        token = cookies.signed[:twitter_session_token]
+        session = Session.find_by(token: token)
+
+        @tweet = Tweet.find_by(id: params[:id])
+
+        if session and @tweet and @tweet.destroy
+           render json: {
+               success: true
+           }
+        else
+            render json: {
+                success: false
+            }
+        end
+    end
+
     private
     def tweet_params
         params.require(:tweet).permit(:message)
